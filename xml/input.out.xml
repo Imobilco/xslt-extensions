@@ -1,0 +1,9 @@
+String output:&lt;div class="sample"&gt;
+		&lt;p&gt;Hello&lt;/p&gt;
+		&lt;p&gt;world&lt;br&gt;тест&lt;/p&gt;
+	&lt;/div&gt;
+JS output:<div class=\"sample\">\n\t\t<p>Hello<\/p>\n\t\t<p>world<br>тест<\/p>\n\t<\/div>
+JS output string:hel\"lo
+JS output number:1
+JSON:"p": "Hello",
+"p": "world<br>тест"
