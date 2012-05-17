@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="XSLT Extensions" default="build.jar" basedir=".">
+
+    <target name="clean" depends="-load.properties">
+        <delete dir="${build.dir}" quiet="true"/>
+    </target>
+
+    <target name="-load.properties">
+        <property file="ant.properties"/>
+    </target>
+
+    <target name="-init" depends="-load.properties">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="build.classes" depends="-init">
+        <mkdir dir="${build.dir}/classes"/>
+        <javac srcdir="${src.dir}"
+               destdir="${build.dir}/classes"
+               includes="**/*.java"
+               deprecation="off"
+               debug="on"
+               source="1.6">
+            <classpath>
+                <pathelement location="${lib.dir}/xalan.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="build.jar" depends="build.classes">
+        <mkdir dir="${build.dir}/jar"/>
+        <copy todir="${build.dir}/jar">
+            <fileset dir="${build.dir}/classes" includes="**/*.class"/>
+        </copy>
+        <jar destfile="${build.dir}/${jar.name}" basedir="${build.dir}/jar"/>
+    </target>
+
+    <target name="deploy" depends="build.jar">
+        <zip destfile="${zip.basedir}/${zip.file}"
+             basedir="${build.dir}"
+             includes="${jar.name}"/>
+    </target>
+
+</project>
